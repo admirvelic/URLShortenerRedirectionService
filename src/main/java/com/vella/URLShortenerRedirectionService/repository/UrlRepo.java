@@ -1,6 +1,6 @@
-package com.vella.URLShortenerRedirectionService.Repository;
+package com.vella.URLShortenerRedirectionService.repository;
 
-import com.vella.URLShortenerRedirectionService.Model.Url;
+import com.vella.URLShortenerRedirectionService.model.Url;
 import com.vella.URLShortenerRedirectionService.exception.CustomErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
