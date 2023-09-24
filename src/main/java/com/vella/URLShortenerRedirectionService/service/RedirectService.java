@@ -1,8 +1,8 @@
-package com.vella.URLShortenerRedirectionService.Service;
+package com.vella.URLShortenerRedirectionService.service;
 
 
-import com.vella.URLShortenerRedirectionService.Model.Url;
-import com.vella.URLShortenerRedirectionService.Repository.UrlRepo;
+import com.vella.URLShortenerRedirectionService.model.Url;
+import com.vella.URLShortenerRedirectionService.repository.UrlRepo;
 import com.vella.URLShortenerRedirectionService.exception.CustomErrorException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,13 +38,13 @@ public class RedirectService {
     }
 
 
-    public Url saveUrl(Url url) {
+    public void saveUrl(Url url) {
         try {
             if (url == null) {
                 throw new IOException("No url was set");
             }
 
-            return repo.saveUrl(url);
+            repo.saveUrl(url);
         } catch (Exception e) {
             throw new CustomErrorException("Filed saving URL to database", e);
         }
