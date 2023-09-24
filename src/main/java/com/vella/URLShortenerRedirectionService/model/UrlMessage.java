@@ -1,13 +1,11 @@
 package com.vella.URLShortenerRedirectionService.model;
 
 
-import jakarta.persistence.Entity;
 import lombok.*;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Getter
 @Setter
 public class UrlMessage {
