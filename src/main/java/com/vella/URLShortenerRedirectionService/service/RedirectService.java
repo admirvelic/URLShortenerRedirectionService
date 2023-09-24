@@ -1,6 +1,7 @@
 package com.vella.URLShortenerRedirectionService.service;
 
 
+import com.vella.URLShortenerRedirectionService.exception.RedirectException;
 import com.vella.URLShortenerRedirectionService.model.Url;
 import com.vella.URLShortenerRedirectionService.repository.UrlRepo;
 import com.vella.URLShortenerRedirectionService.exception.CustomErrorException;
@@ -33,7 +34,7 @@ public class RedirectService {
             return redirectionUrl;
 
         } catch (Exception e) {
-            throw new CustomErrorException("Failed redirecting to real URL", e);
+            throw new RedirectException("Failed redirecting to real URL", e);
         }
     }
 
