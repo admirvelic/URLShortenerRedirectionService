@@ -1,4 +1,4 @@
-package com.vella.URLShortenerRedirectionService.Model;
+package com.vella.URLShortenerRedirectionService.model;
 
 
 import jakarta.persistence.Entity;
