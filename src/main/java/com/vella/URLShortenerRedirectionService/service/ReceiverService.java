@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 public class ReceiverService {
 
     private final RedirectService service;
+    private final Gson gson;
 
     public void receiveMessage(String message) {
         log.info("Received <" + message + ">");
 
-        Gson gson = new Gson();
 
         UrlMessage urlMessage = gson.fromJson(message, UrlMessage.class);
 
@@ -26,11 +26,11 @@ public class ReceiverService {
         url.setShortURL(urlMessage.getShortURL());
         url.setRealURL(urlMessage.getRealURL());
 
-        if(urlMessage.getAction().equals(Action.SAVE)){
+        if (urlMessage.getAction().equals(Action.SAVE)) {
             service.saveUrl(url);
         }
 
-        if(urlMessage.getAction().equals(Action.DELETE)){
+        if (urlMessage.getAction().equals(Action.DELETE)) {
             service.deleteUrl(url);
         }
     }
