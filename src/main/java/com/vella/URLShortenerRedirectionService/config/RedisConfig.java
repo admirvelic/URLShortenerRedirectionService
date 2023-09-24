@@ -1,4 +1,4 @@
-package com.vella.URLShortenerRedirectionService.Config;
+package com.vella.URLShortenerRedirectionService.config;
 
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +21,7 @@ public class RedisConfig {
         //redisStandaloneConfiguration.setPassword("password");
 
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(redisStandaloneConfiguration);
-        return  jedisConnectionFactory;
+        return jedisConnectionFactory;
     }
 
     @Bean
