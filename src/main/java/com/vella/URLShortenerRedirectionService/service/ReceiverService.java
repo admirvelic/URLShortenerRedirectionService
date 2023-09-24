@@ -1,9 +1,9 @@
-package com.vella.URLShortenerRedirectionService.Service;
+package com.vella.URLShortenerRedirectionService.service;
 
 import com.google.gson.Gson;
-import com.vella.URLShortenerRedirectionService.Model.Action;
-import com.vella.URLShortenerRedirectionService.Model.Url;
-import com.vella.URLShortenerRedirectionService.Model.UrlMessage;
+import com.vella.URLShortenerRedirectionService.model.Action;
+import com.vella.URLShortenerRedirectionService.model.Url;
+import com.vella.URLShortenerRedirectionService.model.UrlMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ public class ReceiverService {
     private final RedirectService service;
 
     public void receiveMessage(String message) {
-        System.out.println("Received <" + message + ">");
+        log.info("Received <" + message + ">");
 
         Gson gson = new Gson();
 
