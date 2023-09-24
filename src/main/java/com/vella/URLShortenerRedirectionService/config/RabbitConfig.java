@@ -1,6 +1,7 @@
 package com.vella.URLShortenerRedirectionService.config;
 
 
+import com.vella.URLShortenerRedirectionService.service.ReceiverService;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
@@ -32,7 +33,7 @@ public class RabbitConfig {
     }
 
     @Bean
-    MessageListenerAdapter listenerAdapter(Receiver receiver) {
+    MessageListenerAdapter listenerAdapter(ReceiverService receiver) {
         return new MessageListenerAdapter(receiver, "receiveMessage");
     }
 }
