@@ -18,7 +18,7 @@ public class RedirectService {
 
     private final UrlRepo repo;
 
-    public String redirectToRealUrl(String hash) {
+    public String createRedirectionUrl(String hash) {
         try {
             if (hash.isEmpty()) {
                 throw new IOException("No URL found");
@@ -29,11 +29,11 @@ public class RedirectService {
             String shortURL = baseShortUrl + hash;
             Url url = repo.findUrlByShortUrl(shortURL);
             String realURL = url.getRealURL();
-            String response = redirect + realURL;
-            return response;
+            String redirectionUrl = redirect + realURL;
+            return redirectionUrl;
 
         } catch (Exception e) {
-            throw new CustomErrorException("Filed redirecting to real URL", e);
+            throw new CustomErrorException("Failed redirecting to real URL", e);
         }
     }
 
@@ -46,7 +46,7 @@ public class RedirectService {
 
             repo.saveUrl(url);
         } catch (Exception e) {
-            throw new CustomErrorException("Filed saving URL to database", e);
+            throw new CustomErrorException("Failed saving URL to database", e);
         }
     }
 
@@ -58,7 +58,7 @@ public class RedirectService {
 
             repo.deleteUrl(url);
         } catch (Exception e) {
-            throw new CustomErrorException("Filed deleting URL to database", e);
+            throw new CustomErrorException("Failed deleting URL to database", e);
         }
     }
 }
