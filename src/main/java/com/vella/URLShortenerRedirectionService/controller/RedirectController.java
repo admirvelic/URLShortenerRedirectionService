@@ -1,7 +1,7 @@
-package com.vella.URLShortenerRedirectionService.Controller;
+package com.vella.URLShortenerRedirectionService.controller;
 
 
-import com.vella.URLShortenerRedirectionService.Service.RedirectService;
+import com.vella.URLShortenerRedirectionService.service.RedirectService;
 import com.vella.URLShortenerRedirectionService.exception.CustomErrorException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ public class RedirectController {
     private final RedirectService service;
 
     @GetMapping("{hash}")
-    public String redirect(@PathVariable String hash)throws CustomErrorException, IOException {
+    public String redirect(@PathVariable String hash) throws CustomErrorException, IOException {
         return service.redirectToRealUrl(hash);
     }
 
