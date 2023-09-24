@@ -1,4 +1,4 @@
-package com.vella.URLShortenerRedirectionService.Config;
+package com.vella.URLShortenerRedirectionService.config;
 
 
 import org.springframework.amqp.core.Queue;
@@ -23,8 +23,7 @@ public class RabbitConfig {
     }
 
     @Bean
-    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
-                                             MessageListenerAdapter listenerAdapter) {
+    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
         container.setQueueNames(queueName);
