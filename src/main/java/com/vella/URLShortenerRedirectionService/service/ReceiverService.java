@@ -1,6 +1,7 @@
 package com.vella.URLShortenerRedirectionService.service;
 
 import com.google.gson.Gson;
+import com.vella.URLShortenerRedirectionService.exception.CustomErrorException;
 import com.vella.URLShortenerRedirectionService.model.Action;
 import com.vella.URLShortenerRedirectionService.model.Url;
 import com.vella.URLShortenerRedirectionService.model.UrlMessage;
@@ -28,10 +29,10 @@ public class ReceiverService {
 
         if (urlMessage.getAction().equals(Action.SAVE)) {
             service.saveUrl(url);
-        }
-
-        if (urlMessage.getAction().equals(Action.DELETE)) {
+        } else if(urlMessage.getAction().equals(Action.DELETE)) {
             service.deleteUrl(url);
+        }else{
+            throw new CustomErrorException("No action was set in the massage");
         }
     }
 }
