@@ -22,7 +22,7 @@ public class UrlRepo {
             redisTemplate.opsForHash().put(KEY, url.getId().toString(), url);
             return url;
         } catch (Exception e) {
-            throw new CustomErrorException("Filed saving URL to Redis", e);
+            throw new CustomErrorException("Failed saving URL to Redis", e);
         }
     }
 
@@ -48,7 +48,7 @@ public class UrlRepo {
         try {
             redisTemplate.opsForHash().delete(KEY, url.getId().toString());
         } catch (Exception e) {
-            throw new CustomErrorException("Filed deleting URL from redis", e);
+            throw new CustomErrorException("Failed deleting URL from redis", e);
         }
     }
 
@@ -57,7 +57,7 @@ public class UrlRepo {
             redisTemplate.opsForHash().put(KEY, url.getId(), url);
             return url;
         } catch (Exception e) {
-            throw new CustomErrorException("Filed updating URL in redis");
+            throw new CustomErrorException("Failed updating URL in redis");
         }
     }
 }
