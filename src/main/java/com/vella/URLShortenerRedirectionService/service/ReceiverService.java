@@ -20,7 +20,6 @@ public class ReceiverService {
     public void receiveMessage(String message) {
         log.info("Received <" + message + ">");
 
-
         UrlMessage urlMessage = gson.fromJson(message, UrlMessage.class);
 
         Url url = new Url();
@@ -29,9 +28,9 @@ public class ReceiverService {
 
         if (urlMessage.getAction().equals(Action.SAVE)) {
             service.saveUrl(url);
-        } else if(urlMessage.getAction().equals(Action.DELETE)) {
+        } else if (urlMessage.getAction().equals(Action.DELETE)) {
             service.deleteUrl(url);
-        }else{
+        } else {
             throw new CustomErrorException("No action was set in the massage");
         }
     }
