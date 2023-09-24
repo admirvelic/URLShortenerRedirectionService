@@ -18,12 +18,8 @@ public class UrlRepo {
     private static final String KEY = "URL";
 
     public Url saveUrl(Url url) {
-        try {
-            redisTemplate.opsForHash().put(KEY, url.getId().toString(), url);
-            return url;
-        } catch (Exception e) {
-            throw new CustomErrorException("Failed saving URL to Redis", e);
-        }
+        redisTemplate.opsForHash().put(KEY, url.getId().toString(), url);
+        return url;
     }
 
     public List<Url> getAllUrl() {
@@ -45,19 +41,11 @@ public class UrlRepo {
     }
 
     public void deleteUrl(Url url) {
-        try {
-            redisTemplate.opsForHash().delete(KEY, url.getId().toString());
-        } catch (Exception e) {
-            throw new CustomErrorException("Failed deleting URL from redis", e);
-        }
+        redisTemplate.opsForHash().delete(KEY, url.getId().toString());
     }
 
     public Url updateUrl(Url url) {
-        try {
-            redisTemplate.opsForHash().put(KEY, url.getId(), url);
-            return url;
-        } catch (Exception e) {
-            throw new CustomErrorException("Failed updating URL in redis");
-        }
+        redisTemplate.opsForHash().put(KEY, url.getId(), url);
+        return url;
     }
 }
