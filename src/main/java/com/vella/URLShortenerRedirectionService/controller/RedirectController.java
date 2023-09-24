@@ -22,7 +22,7 @@ public class RedirectController {
 
     @GetMapping("{hash}")
     public String redirect(@PathVariable String hash) throws CustomErrorException, IOException {
-        return service.redirectToRealUrl(hash);
+        return service.createRedirectionUrl(hash);
     }
 
 }
