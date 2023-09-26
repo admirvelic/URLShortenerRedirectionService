@@ -5,16 +5,17 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
+import java.io.Serializable;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @RedisHash("Url")
-public class Url {
+public class Url implements Serializable {
 
-    @Id
-    private Long id;
+    private String id;
 
     private String realURL;
 
