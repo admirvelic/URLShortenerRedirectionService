@@ -7,6 +7,7 @@ import com.vella.URLShortenerRedirectionService.repository.UrlRepo;
 import com.vella.URLShortenerRedirectionService.exception.CustomErrorException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -30,6 +31,9 @@ public class RedirectService {
             String shortURL = baseShortUrl + hash;
             Url url = repo.findUrlByShortUrl(shortURL);
             String realURL = url.getRealURL();
+            if (realURL.isEmpty()) {
+                return null;
+            }
             String redirectionUrl = redirect + realURL;
             return redirectionUrl;
 
