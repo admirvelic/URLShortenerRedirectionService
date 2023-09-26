@@ -22,8 +22,7 @@ public class RabbitConfig {
     }
 
     @Bean
-    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
-                                             MessageListenerAdapter listenerAdapter) {
+    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory, MessageListenerAdapter listenerAdapter) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
         container.setConnectionFactory(connectionFactory);
         container.setQueueNames(queueName);
@@ -32,7 +31,7 @@ public class RabbitConfig {
     }
 
     @Bean
-    MessageListenerAdapter listenerAdapter(Receiver receiver) {
+    MessageListenerAdapter listenerAdapter(ReceiverService receiver) {
         return new MessageListenerAdapter(receiver, "receiveMessage");
     }
 }
