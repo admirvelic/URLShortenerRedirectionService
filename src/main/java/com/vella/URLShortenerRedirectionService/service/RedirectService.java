@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Random;
 
 
 @RequiredArgsConstructor
@@ -22,6 +23,7 @@ public class RedirectService {
 
     public String createRedirectionUrl(String hash) {
         try {
+            log.info("Redirecting from hash: " + hash);
             if (hash.isEmpty()) {
                 throw new IOException("No URL found");
             }
@@ -29,14 +31,19 @@ public class RedirectService {
             String baseShortUrl = "http://localhost:8080/";
             String redirect = "redirect:/";
             String shortURL = baseShortUrl + hash;
-            Url url = repo.findUrlByShortUrl(shortURL);
+            log.info("Redirecting from url: "+ shortURL);
+            Url url = repo.findByShortURL(shortURL);
+            if(url== null){
+                throw new IOException("No URL to redirect to");
+            }
             String realURL = url.getRealURL();
+            log.info("Redirecting to: "+realURL);
             if (realURL.isEmpty()) {
                 return null;
             }
             String redirectionUrl = redirect + realURL;
+            log.info("Redirect url found"+ redirectionUrl);
             return redirectionUrl;
-
         } catch (Exception e) {
             throw new RedirectException("Failed redirecting to real URL", e);
         }
@@ -44,15 +51,14 @@ public class RedirectService {
 
 
     public void saveUrl(Url url) {
-        try {
-            if (url == null) {
-                throw new IOException("No url was set");
-            }
-
-            repo.saveUrl(url);
-        } catch (Exception e) {
-            throw new CustomErrorException("Failed saving URL to database", e);
-        }
+//        try {
+//            if (url == null) {
+//                throw new IOException("No url was set");
+//            }
+            repo.save(url);
+//        } catch (Exception e) {
+//            throw new CustomErrorException("Failed saving URL to database", e);
+//        }
     }
 
     public void deleteUrl(Url url) {
@@ -61,7 +67,7 @@ public class RedirectService {
                 throw new IOException("No url was set");
             }
 
-            repo.deleteUrl(url);
+            repo.delete(url);
         } catch (Exception e) {
             throw new CustomErrorException("Failed deleting URL to database", e);
         }
