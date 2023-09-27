@@ -29,7 +29,7 @@ public class RedirectService {
             }
 
             String baseShortUrl = "http://localhost:8080/";
-            String redirect = "redirect:/";
+            String redirect = "redirect:";
             String shortURL = baseShortUrl + hash;
             log.info("Redirecting from url: "+ shortURL);
             Url url = repo.findByShortURL(shortURL);
@@ -42,23 +42,23 @@ public class RedirectService {
                 return null;
             }
             String redirectionUrl = redirect + realURL;
-            log.info("Redirect url found"+ redirectionUrl);
+            log.info("Redirect url found: "+ redirectionUrl);
             return redirectionUrl;
         } catch (Exception e) {
-            throw new RedirectException("Failed redirecting to real URL", e);
+            throw new RedirectException(HttpStatus.NOT_FOUND,"Failed redirecting to real URL", e);
         }
     }
 
 
     public void saveUrl(Url url) {
-//        try {
-//            if (url == null) {
-//                throw new IOException("No url was set");
-//            }
+        try {
+            if (url == null) {
+                throw new IOException("No url was set");
+            }
             repo.save(url);
-//        } catch (Exception e) {
-//            throw new CustomErrorException("Failed saving URL to database", e);
-//        }
+        } catch (Exception e) {
+            throw new CustomErrorException(HttpStatus.INTERNAL_SERVER_ERROR,"Failed saving URL to database", e);
+        }
     }
 
     public void deleteUrl(Url url) {
@@ -69,7 +69,7 @@ public class RedirectService {
 
             repo.delete(url);
         } catch (Exception e) {
-            throw new CustomErrorException("Failed deleting URL to database", e);
+            throw new CustomErrorException(HttpStatus.INTERNAL_SERVER_ERROR,"Failed deleting URL to database", e);
         }
     }
 }
