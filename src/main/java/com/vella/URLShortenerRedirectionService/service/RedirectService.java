@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.Random;
 
 
 @RequiredArgsConstructor
@@ -21,7 +20,7 @@ public class RedirectService {
 
     private final UrlRepo repo;
 
-    public String createRedirectionUrl(String hash) {
+    public String getRealUrl(String hash) {
         try {
             log.info("Redirecting from hash: " + hash);
             if (hash.isEmpty()) {
@@ -29,20 +28,17 @@ public class RedirectService {
             }
 
             String baseShortUrl = "http://localhost:8080/";
-            String redirect = "redirect:";
             String shortURL = baseShortUrl + hash;
             log.info("Redirecting from url: "+ shortURL);
             Url url = repo.findByShortURL(shortURL);
             if(url== null){
                 throw new IOException("No URL to redirect to");
             }
-            String realURL = url.getRealURL();
-            log.info("Redirecting to: "+realURL);
-            if (realURL.isEmpty()) {
+            String redirectionUrl = url.getRealURL();
+            log.info("Redirecting to: "+redirectionUrl);
+            if (redirectionUrl.isEmpty()) {
                 return null;
             }
-            String redirectionUrl = redirect + realURL;
-            log.info("Redirect url found: "+ redirectionUrl);
             return redirectionUrl;
         } catch (Exception e) {
             throw new RedirectException(HttpStatus.NOT_FOUND,"Failed redirecting to real URL", e);
